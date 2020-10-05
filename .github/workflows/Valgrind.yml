@@ -20,4 +20,4 @@ jobs:
     - name: make test
       run: |
         make test -C 
-        valgrind ./build/Cater.out
+        valgrind ./Cater.out
