@@ -220,7 +220,7 @@ void * agent_C ( void * in) {
     }
 }
 
-void * smoker_bread ( void * in) {
+void * caterer_bread ( void * in) {
     while ( 1 ) {
         sem_wait (& SemBread);
         pthread_mutex_lock (& Smoke);
@@ -236,7 +236,7 @@ void * smoker_bread ( void * in) {
     }
 }
 
-void * smoker_sausage ( void * in) {
+void * caterer_sausage ( void * in) {
     while ( 1 ) {
         sem_wait (& SemSausage);
         pthread_mutex_lock (& Smoke);
@@ -252,7 +252,7 @@ void * smoker_sausage ( void * in) {
     }
 }
 
-void * smoker_mustard ( void * in) {
+void * caterer_mustard ( void * in) {
     while ( 1 ) {
         sem_wait (& SemMustard);
         pthread_mutex_lock (& Smoke);
@@ -307,9 +307,9 @@ int  main () {
     sem_init (& SemMustard, 1 , 0 );
 
     pthread_create (& Agent, NULL , & agent, NULL );
-    pthread_create (& caterers [ 0 ], NULL , & smoker_bread, NULL );
-    pthread_create (& caterers [ 1 ], NULL , & smoker_sausage, NULL );
-    pthread_create (& caterers [ 2 ], NULL , & smoker_mustard, NULL );
+    pthread_create (& caterers [ 0 ], NULL , & caterer_bread, NULL );
+    pthread_create (& caterers [ 1 ], NULL , & caterer_sausage, NULL );
+    pthread_create (& caterers [ 2 ], NULL , & caterer_mustard, NULL );
     pthread_create (& Agent_A, NULL , & agent_A, NULL );
     pthread_create (& Agent_B, NULL , & agent_B, NULL );
     pthread_create (& Agent_C, NULL , & agent_C, NULL );
