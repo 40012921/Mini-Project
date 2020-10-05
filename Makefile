@@ -1,4 +1,4 @@
-Cater: main.cpp
+Cater: 
 	g++ -o Cater.out main.cpp -lpthread
-run:Cater.out
+run:
 	./Cater.out
