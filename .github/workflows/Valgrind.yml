@@ -19,5 +19,5 @@ jobs:
         sudo apt-get -y install libcunit1 libcunit1-doc libcunit1-dev 
     - name: make test
       run: |
-        g++ main.cpp -lpthread -o Cater.out
-        valgrind ./Cater.out
+        g++ CPP_Miniproject-master/main.cpp -lpthread -o CPP_Miniproject-master/Cater.out
+        valgrind ./CPP_Miniproject-master/Cater.out
