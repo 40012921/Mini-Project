@@ -20,7 +20,7 @@ pthread_t Agent, Agent_A, Agent_B, Agent_C;
 
 pthread_t Pusher_A, Pusher_B, Pusher_C;
 
-pthread_mutex_t pushers, Smoke;
+pthread_mutex_t pushers, Eat;
 
 
 int product [ 3 ];
@@ -38,10 +38,10 @@ sem_t sausage, bread, mustard, SemAgent, SemBread, SemSausage, SemMustard;
 
 
  Cater :: Cater (int id) {
-    pthread_mutex_lock (& Smoke);
+    pthread_mutex_lock (& Eat);
     if (hotdogs_done_so_far>= MAX_HOTDOGS) {
         cout << " MAX HOTDOGS TO BE PREPARED !!! " ;
-        pthread_mutex_unlock (& Smoke);
+        pthread_mutex_unlock (& Eat);
         return ;
     }
     if (id == 1 ) {
@@ -52,7 +52,7 @@ sem_t sausage, bread, mustard, SemAgent, SemBread, SemSausage, SemMustard;
         hotdogs [ 2 ] ++;
     }
     hotdogs_done_so_far ++;
-    pthread_mutex_unlock (& Smoke);
+    pthread_mutex_unlock (& Eat);
     switch (id) {
 
         case  1 :
@@ -69,7 +69,7 @@ sem_t sausage, bread, mustard, SemAgent, SemBread, SemSausage, SemMustard;
             break ;
     }
    sleep ( 1 );
-    pthread_mutex_lock (& Smoke);
+    pthread_mutex_lock (& Eat);
     switch (id) {
 
         case  1 :
@@ -88,7 +88,7 @@ sem_t sausage, bread, mustard, SemAgent, SemBread, SemSausage, SemMustard;
     cout <<  " Hot-Dogs Prepared So far ...  " << endl;
     cout << " w/Bread :" <<hotdogs [ 0 ]<< " w/Sausages :" <<hotdogs [ 1 ]<< " w/Mustard :" <<hotdogs [ 2 ]<< endl;
     cout << endl ;
-    pthread_mutex_unlock (& Smoke);
+    pthread_mutex_unlock (& Eat);
 }
 
 
@@ -223,14 +223,14 @@ void * agent_C ( void * in) {
 void * caterer_bread ( void * in) {
     while ( 1 ) {
         sem_wait (& SemBread);
-        pthread_mutex_lock (& Smoke);
+        pthread_mutex_lock (& Eat);
         if (hotdogs_done_so_far>= MAX_HOTDOGS) {
-            pthread_mutex_unlock (& Smoke);
+            pthread_mutex_unlock (& Eat);
             pthread_exit ( NULL );
         } else {
 
             cout << " Caterer with Bread is READY to make ...  "<< endl ;
-            pthread_mutex_unlock (& Smoke);
+            pthread_mutex_unlock (& Eat);
             Cater ( 1 );
         }
     }
@@ -239,14 +239,14 @@ void * caterer_bread ( void * in) {
 void * caterer_sausage ( void * in) {
     while ( 1 ) {
         sem_wait (& SemSausage);
-        pthread_mutex_lock (& Smoke);
+        pthread_mutex_lock (& Eat);
         if (hotdogs_done_so_far>= MAX_HOTDOGS) {
-            pthread_mutex_unlock (& Smoke);
+            pthread_mutex_unlock (& Eat);
             pthread_exit ( NULL );
         } else {
 
             cout << " Caterer with Sausage is READY to make ... " << endl;
-            pthread_mutex_unlock (& Smoke);
+            pthread_mutex_unlock (& Eat);
             Cater ( 2 );
         }
     }
@@ -255,14 +255,14 @@ void * caterer_sausage ( void * in) {
 void * caterer_mustard ( void * in) {
     while ( 1 ) {
         sem_wait (& SemMustard);
-        pthread_mutex_lock (& Smoke);
+        pthread_mutex_lock (& Eat);
         if (hotdogs_done_so_far >= MAX_HOTDOGS) {
-            pthread_mutex_unlock (& Smoke);
+            pthread_mutex_unlock (& Eat);
             pthread_exit ( NULL );
         } else {
-            // else the smoker smokes
+            // else the Eatr Eats
             cout << " Smoker with Mustard is READY to make ... " << endl;
-            pthread_mutex_unlock (& Smoke);
+            pthread_mutex_unlock (& Eat);
             Cater ( 3 );
         }
     }
