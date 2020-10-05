@@ -14,5 +14,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
-    - name: make Cater
-      run:  make Cater -C 
+    - name: make all
+      run:  make all -C CPP_Miniproject-master/ 
